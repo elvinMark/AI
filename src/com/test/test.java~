@@ -7,7 +7,6 @@ import java.util.*;
 
 public class test{
     public static void main(String args[]){
-	/*
 	//Testing Perceptron
 	Perceptron p = new Perceptron(2,1);
 	Matrix in;
@@ -37,16 +36,5 @@ public class test{
 	System.out.println(out);
 	mlp.train(in,out,4000);
 	System.out.println(mlp.forward(in));
-	*/
-	Matrix A = new Matrix(3,3);
-	A.random();
-	Matrix[] out;
-	out = A.QR();
-	System.out.println(A);
-	System.out.println(out[0]);
-	System.out.println(out[1]);
-	System.out.println(out[0].dot(out[1]));
-	out = A.eigen(100);
-	System.out.println(out[0]);
     }
 }

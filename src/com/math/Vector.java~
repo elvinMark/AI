@@ -16,14 +16,6 @@ public class Vector{
     public double get(int i){
 	return this.data[i];
     }
-    public void zeros(){
-	for(int i = 0;i<this.len;i++)
-	    this.data[i] = 0;
-    }
-    public void ones(){
-	for(int i = 0;i<this.len;i++)
-	    this.data[i] = 1;
-    }
     public void random(){
 	Random r = new Random();
 	for(int i = 0;i<this.len;i++)
