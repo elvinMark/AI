@@ -38,15 +38,16 @@ public class test{
 	mlp.train(in,out,4000);
 	System.out.println(mlp.forward(in));
 	*/
-	Matrix A = new Matrix(3,3);
-	A.random();
+	double[][] data = {{52,30,49,28},{30,50,8,44},{49,8,46,16},{28,44,16,22}};
+	Matrix A = new Matrix(data);
 	Matrix[] out;
 	out = A.QR();
 	System.out.println(A);
 	System.out.println(out[0]);
 	System.out.println(out[1]);
 	System.out.println(out[0].dot(out[1]));
-	out = A.eigen(100);
+	out = A.eigen(1000);
 	System.out.println(out[0]);
+	System.out.println(out[1]);
     }
 }

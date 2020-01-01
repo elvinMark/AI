@@ -146,6 +146,7 @@ public class Matrix{
 	out[1] = U;
 	return out;
     }
+    /*
     public Matrix[] QR(){
 	Matrix[] out = new Matrix[2];
 	Matrix Q,R;
@@ -170,18 +171,45 @@ public class Matrix{
 	out[0] = R;
 	out[1] = Q;
 	return out;
+    }*/
+    public Matrix[] QR(){
+	Matrix[] out = new Matrix[2];
+	Matrix Q,R;
+	Q = new Matrix(this.rows,this.cols);
+	R = new Matrix(this.rows,this.cols);
+	for(int i = 0;i<this.rows;i++){
+	    for(int j = 0;j<i;j++){
+		R.data[j][i] = 0;
+		for(int k = 0;k<this.cols;k++)
+		    R.data[j][i] += this.data[k][i]*Q.data[k][j];
+		for(int k = 0;k<this.cols;k++)
+		    Q.data[k][i] += R.data[j][i]*Q.data[k][j];
+	    }
+	    for(int j = 0;j<this.cols;j++){
+		Q.data[j][i] = this.data[j][i] - Q.data[j][i];
+		R.data[i][i] += Q.data[j][i]*Q.data[j][i];
+	    }
+	    R.data[i][i] = Math.sqrt(R.data[i][i]);
+	    for(int j = 0;j<this.cols;j++)
+		Q.data[j][i] = Q.data[j][i]/R.data[i][i];
+	}
+	out[0] = Q;
+	out[1] = R;
+	return out;
     }
     public Matrix[] eigen(int N){
 	Matrix[] out;
 	Matrix[] qr;
 	out = new Matrix[2];
-	Matrix lambda;
-	lambda = this;
+	out[1] = new Matrix(this.rows,this.cols);
+	out[1].eye();
+	System.out.println(out[1]);
+        out[0] = this;
 	for(int i = 0;i<N;i++){
-	    qr = lambda.QR();
-	    lambda = qr[1].dot(qr[0]);
+	    qr = out[0].QR();
+	    out[0] = qr[1].dot(qr[0]);
+	    out[1] = out[1].dot(qr[0]);
 	}
-	out[0] = lambda;
 	return out;
     }
     public Matrix inv(){
